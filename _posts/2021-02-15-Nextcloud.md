@@ -158,7 +158,7 @@ $CONFIG = array (
   'datadirectory' => '/var/www/html/nextcloud/data',
   'dbtype' => 'sqlite3',
   'version' => '20.0.4.0',
-  'overwrite.cli.url' => 'http://192.168.xx.xx/nextcloud', <span style="color:red">// URL 주소를 확인할 수 있다.</span>
+  <span style="color:red">'overwrite.cli.url' => 'http://192.168.xx.xx/nextcloud'</span>, //URL 주소를 확인할 수 있다.
   'installed' => true,
   'memcache.distributed' => '\\OC\\Memcache\\Redis',
   'memcache.locking' => '\\OC\\Memcache\\Redis',
@@ -175,3 +175,5 @@ $CONFIG = array (
 * URL 을 통해 접근하면 관리자 웹 화면이 나타난다.
 
 ![Nextcloud](/image/3.png)
+![Nextcloud](/image/s1.JPG)
+* NextCloud 메인화면 입니다.
