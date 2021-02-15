@@ -173,3 +173,5 @@ $CONFIG = array (
 </code>
 </pre>
 * URL 을 통해 접근하면 관리자 웹 화면이 나타난다.
+
+![Nextcloud](/image/3.png)
