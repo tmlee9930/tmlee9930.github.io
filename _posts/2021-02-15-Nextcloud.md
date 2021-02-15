@@ -86,8 +86,12 @@ rh-php72-php-opcache rh-php72-php-imagick
 #### 3.4 MariaDB 설치
 <pre>
 <code>
-
+~]# yum install -y mariadb mariadb-server
+~]# systemctl enable mariadb.service
+~]# systemctl start mariadb.service
 </code>
 </pre>
+* 이 작업을 완료 한 후 Nextcloud가 액세스 할 수 있도록 사용자 이름과 비밀번호로 데이터 베이스를 생성합니다.
 
+#### 3.5 Nextcloud 설치
 
