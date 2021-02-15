@@ -94,4 +94,33 @@ rh-php72-php-opcache rh-php72-php-imagick
 * 이 작업을 완료 한 후 Nextcloud가 액세스 할 수 있도록 사용자 이름과 비밀번호로 데이터 베이스를 생성합니다.
 
 #### 3.5 Nextcloud 설치
+1. [NextCloud Install](https://nextcloud.com/install/)
+* NextCloud Server 다운로드 -> 다운로드 -> 서버 소유자 용 아카이브 파일로 이동하여 tar.bz2 다운로드 하였다. 
+2. GPG-PUB-KEY Error로 인한 yum install 실패 조치 사항
+<pre>
+<code>
+~]# wget https://download.nextcloud.com/server/release/nextcloud-20.0.4.tar.bz2.asc
+~]# wget https://nextcloud.com/nextcloud.asc
+~]# gpg -import nextcloud.asc
+~]# gpg –verify nextcloud-20.0.4.tar.bz2.asc nextcloud-20.0.4.tar.bz2
+</code>
+</pre>
+3. RPM 기반의 패키지들은 RPM-GPG-KEY라는 공개키 기반의 디지털 서명과 검증을 통해 해당 패키지의 버전과 그에 따른 
+보증과 검증을 수행하여 때문에 Public GPG-KEY가 등록 되어있지 않은 상태에서는 yum을 사용할 수 없기 때문에 등록한다.
 
+#### 3.6 압축 풀기
+<pre>
+<code>
+~]# bunzip2 nextcloud-*.bz2
+~]# tar -xvf nextcloud-20.0.4.tar
+~]# cp -R nextcloud /var/www/html/
+</code>
+</pre>
+* 콘텐츠를 웹 서버의 루트 디렉터리로 복사한다. 아파치 사용으로 /var/www/html 입니다.
+
+<pre>
+<code>
+~]# mkdir /var/www/html/nextcloud/data
+</code>
+</pre>
+* 설치 프로세스 중에는 데이터 폴더가 생성되지 않아 수동으로 디렉터리를 생성하였다.
