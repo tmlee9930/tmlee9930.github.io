@@ -1,7 +1,7 @@
 NextCloud 개념잡기
 ====
 
-NextCloud 란?
+1.NextCloud 란?
 ----
 1. NextCloud는 파일 호스팅 서비스를 만들고 사용하기 위한 client-server software이며, 오픈소스로 알려진 인프라 구축을 진행함.
 
@@ -11,9 +11,13 @@ NextCloud 란?
 
 3. 원래는 OwnCloud 개발자인 Frank Karlitschek은 OwnCloud에서 파생된 NextCloud를 만들었다.
 
+4. 웹이나 앱에서 서버의 파일을 사용하고, 파일을 전송하고, 파일을 외부와 공유할 Url을 만든다.
+
+5. 모바일 기기에서 촬영한 사진을 자동으로 업로드, WebDav 프로토콜과 채팅의 기능도 제공한다.
+
 ![Nextcloud](/image/1.JPG)
 
-NAS와 Cloud의 조합
+2.NAS와Cloud의 조합
 ----
 
 **NAS(Network Attach Storage)를 많은 사용자의 관점에서 단순히 백업용으로 생각하고 사용하고 있다. NAS는 파일 관리에 적합하여 
@@ -27,7 +31,44 @@ NAS와 Cloud의 조합
 
 ![NextCloud](/image/2.JPG)
 
+3.NextCloud 설치과정
+----
+* CentOS 7.9 , PHP7.2 , MariaDB 배포하고 Apache에서 실행되는 Nextcloud를 배포한다.
+* CentOS 7 설치하여 성공적인 플랫폼을 제공하도록 구축 하였다.
+<pre>
+<code>
+~]# yum update -y * 최신 커널 업데이트를 진행한다.
+~]# yum install -y httpd * Apache 웹 서버 패키지를 설치한다.
+</code>
+</pre>
 
+#### 3.1 Apache 설정 -> vim /etc/httpd/conf.d/nextcloud.conf
+<pre>
+<code>
+<> -> {}로 표기
+{VirtualHost *:80} 
+  DocumentRoot /var/www/html  // 실제 소스파일이 있는 Web Root 지정소
+  ServerName test.domain.com  // 서비스 할 도메인 지정소
+{Directory "/var/www/html/"}
+  Require all granted  // 디렉터리에 대한 액세스 허용
+  AllowOverride All    // 접근자를 모두 허락하도록 설정
+  Options FollowSymLinks MultiViews  // 디렉터리에 대한 특정 옵션 설정
+{/Directory}
+{/VirtualHost}
+</code>
+</pre>
+~]# systemctl enable httpd.service
 
+~]# systemctl start httpd.service
+* Apache Web Service 데몬 enable과 start 시킨다.
 
-
+#### 3.2 PHP 관련 패키지 설치
+* NextCloud는 PHP 기반 프로그래밍 언어를 사용하여 새로운 모듈을 만들고 싶으면 (최신)7.2이상의 패키지를 설치한다.
+<pre>
+<code>
+~]# yum install -y centos-release-scl
+rh-php72 rh-php72-php rh-php72-php-gd rh-php72-php-mbstring \
+rh-php72-php-intl rh-php72-php-pecl-apcu rh-php72-php-mysqlnd rh-php72-php-pecl-redis \
+rh-php72-php-opcache rh-php72-php-imagick
+</code>
+</pre>
