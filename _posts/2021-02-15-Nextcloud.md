@@ -124,3 +124,52 @@ rh-php72-php-opcache rh-php72-php-imagick
 </code>
 </pre>
 * 설치 프로세스 중에는 데이터 폴더가 생성되지 않아 수동으로 디렉터리를 생성하였다.
+
+<pre>
+<code>
+~]# Chown -R apache:apache /var/www/html/nextcloud
+~]# systemctl restart httpd.service
+</code>
+</pre>
+* nextcloud 전체 폴데에 Apache 사용자, 그룹 권한을 부여하고 데몬을 재시작한다.
+
+<pre>
+<code>
+~]# firewall-cmd --zone=public --add-service=http --permanent
+~]# firewall-cmd --reload
+</code>
+</pre>
+* Apache 를 접근하도록 방화벽에 설정하고 활성화 시킨다.
+
+#### 3.6 웹 접속 URL 확인
+1. Nextcloud 설치가 끝났으면 /var/www/html/nextcloud/config/config.php 파일에서 웹 접근을 위한 경로를 확인한다.
+~]# vim /var/www/html/nextcloud/config/config.php
+<pre>
+<code>
+<?php
+$CONFIG = array (
+  'instanceid' => 'oc5qa6uhr5qj',
+  'passwordsalt' => 'lSEQRm75mSF9MpG8y4zPBHrF+D+A1B',
+  'secret' => 'Id0gGxWofZbINYLGouTjLeJJh36eOOsBY/lch1w532Sx5/m0',
+  'trusted_domains' =>
+  array (
+    0 => '192.168.1.15',
+  ),
+  'datadirectory' => '/var/www/html/nextcloud/data',
+  'dbtype' => 'sqlite3',
+  'version' => '20.0.4.0',
+  'overwrite.cli.url' => 'http://192.168.xx.xx/nextcloud', // URL 주소를 확인할 수 있다.
+  'installed' => true,
+  'memcache.distributed' => '\\OC\\Memcache\\Redis',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'memcache.local' => '\\OC\\Memcache\\APCu',
+  'redis' =>
+  array (
+    'host' => 'localhost',
+    'port' => 6379,
+  ),
+  'maintenance' => false,
+);
+</code>
+</pre>
+* URL 을 통해 접근하면 관리자 웹 화면이 나타난다.
