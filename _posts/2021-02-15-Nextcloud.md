@@ -42,7 +42,7 @@ NextCloud 개념잡기
 </code>
 </pre>
 
-###### 3.1 Apache 설정 -> vim /etc/httpd/conf.d/nextcloud.conf
+#### 3.1 Apache 설정 -> vim /etc/httpd/conf.d/nextcloud.conf
 <pre>
 <code>
 <> -> {}로 표기
@@ -143,6 +143,7 @@ rh-php72-php-opcache rh-php72-php-imagick
 
 #### 3.7 웹 접속 URL 확인
 1. Nextcloud 설치가 끝났으면 /var/www/html/nextcloud/config/config.php 파일에서 웹 접근을 위한 경로를 확인한다.
+
 ~]# vim /var/www/html/nextcloud/config/config.php
 <pre>
 <code>
