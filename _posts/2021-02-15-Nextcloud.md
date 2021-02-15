@@ -42,7 +42,7 @@ NextCloud 개념잡기
 </code>
 </pre>
 
-#### 3.1 Apache 설정 -> vim /etc/httpd/conf.d/nextcloud.conf
+###### 3.1 Apache 설정 -> vim /etc/httpd/conf.d/nextcloud.conf
 <pre>
 <code>
 <> -> {}로 표기
