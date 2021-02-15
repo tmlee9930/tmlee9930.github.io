@@ -72,3 +72,22 @@ rh-php72-php-intl rh-php72-php-pecl-apcu rh-php72-php-mysqlnd rh-php72-php-pecl-
 rh-php72-php-opcache rh-php72-php-imagick
 </code>
 </pre>
+
+#### 3.3 Apache 설정 파일 SymLinks 
+<pre>
+<code>
+~]# ln –s /opt/rh/httpd24/root/etc/httpd/conf.d/rh-php72-php.conf /etc/httpd/conf.d/
+~]# ln -s /opt/rh/httpd24/root/etc/httpd/conf.modules.d/15-rh-php72-php.conf /etc/httpd/conf.modules.d/
+~]# ln -s /opt/rh/httpd24/root/etc/httpd/modules/librh-php72-php7.so /etc/httpd/modules/
+</code>
+</pre>
+* httpd 설치 경로 /opt/rh/httpd24에서 Nextcloud 설정 경로와 심볼릭 링크를 구성 하였다.
+
+#### 3.4 MariaDB 설치
+<pre>
+<code>
+
+</code>
+</pre>
+
+
