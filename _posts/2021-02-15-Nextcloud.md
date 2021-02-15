@@ -174,6 +174,12 @@ $CONFIG = array (
 </pre>
 * URL 을 통해 접근하면 관리자 웹 화면이 나타난다.
 
-![Nextcloud](/image/3.png)
-![Nextcloud](/image/s1.JPG)
+<img src="/image/3.png" width="100%" height="500px" alt="NextCloud"></img>
+<img src="/image/s1.JPG" width="100%" height="500px" alt="NextCloud"></img>
 * NextCloud 메인화면 입니다.
+
+4.NextCloud 공통기능
+----
+#### 4.1 파일
+<img src="/image/s2.JPG" width="70%" height="400px" alt="NextCloud"></img>
+* 
