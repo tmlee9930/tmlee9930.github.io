@@ -141,7 +141,7 @@ rh-php72-php-opcache rh-php72-php-imagick
 </pre>
 * Apache 를 접근하도록 방화벽에 설정하고 활성화 시킨다.
 
-#### 3.6 웹 접속 URL 확인
+#### 3.7 웹 접속 URL 확인
 1. Nextcloud 설치가 끝났으면 /var/www/html/nextcloud/config/config.php 파일에서 웹 접근을 위한 경로를 확인한다.
 ~]# vim /var/www/html/nextcloud/config/config.php
 <pre>
