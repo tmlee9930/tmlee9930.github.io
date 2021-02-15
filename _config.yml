@@ -98,8 +98,7 @@ author:
   name             : "TMLEE"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "**기술 블로그**"
-  location         : "Somewhere"
-  email            : 
+  email            : tmlee@gluesys.com
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
