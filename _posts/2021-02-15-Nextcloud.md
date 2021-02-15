@@ -158,7 +158,7 @@ $CONFIG = array (
   'datadirectory' => '/var/www/html/nextcloud/data',
   'dbtype' => 'sqlite3',
   'version' => '20.0.4.0',
-  'overwrite.cli.url' => 'http://192.168.xx.xx/nextcloud', // URL 주소를 확인할 수 있다.
+  'overwrite.cli.url' => 'http://192.168.xx.xx/nextcloud', <span style="color:red">// URL 주소를 확인할 수 있다.</span>
   'installed' => true,
   'memcache.distributed' => '\\OC\\Memcache\\Redis',
   'memcache.locking' => '\\OC\\Memcache\\Redis',
