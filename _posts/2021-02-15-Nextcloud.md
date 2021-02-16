@@ -1,7 +1,7 @@
 NextCloud 개념잡기
 ====
 
-1.NextCloud 란?
+1.NextCloud 란
 ----
 1. NextCloud는 파일 호스팅 서비스를 만들고 사용하기 위한 client-server software이며, 오픈소스로 알려진 인프라 구축을 진행함.
 
@@ -131,7 +131,7 @@ rh-php72-php-opcache rh-php72-php-imagick
 ~]# systemctl restart httpd.service
 </code>
 </pre>
-* nextcloud 전체 폴데에 Apache 사용자, 그룹 권한을 부여하고 데몬을 재시작한다.
+* nextcloud 전체 폴데에 Apache 사용자, 그룹 권한을 부여하고 데몬을 재시작 한다.
 
 <pre>
 <code>
