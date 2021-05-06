@@ -1,0 +1,89 @@
+---
+layout:     post
+title:      "마이크로 서비스 IBM S/W"
+date:       2021-05-20
+author:     이 태민 (tmlee@gluesys.com)
+categories: blog
+tags:       [Docker, Command, Option, kube]
+cover:      "/assets/1.JPG"
+main:      "/assets/1.JPG"
+---
+
+## ISCSI  개념
+
+* ISCSI Target : ISCSI 서버 (스토리지 및 데이터 제공) - targetcli 패키지 필요
+
+* ISCSI Initiator : ISCSI 클라이언트 - iscsi-initiator-utils 패키지 필요
+
+* IQN (ISCSI Qualified Name) - ISCSI Target/Initiator의 각 고유 도메인 이름
+ 
+* 포맷 형태 : Type.Data.Naming_Auth:Command
+1. Type : iqn (Default)
+1. Data : YYYY-MM
+1. Naming_Auth : 도메인의 역순 형태
+1. Command : 설명(옵션)
+ 
+* 예시 : iqn.2021-11.com.gluesys:target
+
+* targetcli : LinuxIO를 위한 General Management 플랫폼
+
+----
+
+## ISCSI 구조
+
+* BackStores : ISCSI 서비스로 제공되는 스토리지 리소스, 스토리지 종류 설정
+ * block : 디스크를 파티션 한 파티션 장치 (논리 볼륨도 가능 ~~!)
+1. 생성 : backstores/block create name=[이름] dev=[디스크 경로]
+1. 예시 : backstores/block create name=block1 dev=/dev/sda
+ * fileio : 파일 시스템 중 일부 공간
+1. 생성 : backstores/fileio create name=[이름] file.or.dev=[생성할 파일 경로] size=[할당할 사이즈]
+1. 예시 : backstores/fileio create name=file1 file.or.dev=/iscsi size=100M 
+ * pscsi : 물리적인 SCSI 장치
+ * ramdisk : RAM 공간의 일부
+
+* iscsi : target 지정된 이름 (iqn)
+ * iscsi/ create [iqn 포맷 이름] -> 자동으로 해당 iqn에 대한 tpg가 생성
+ * tpg : target portal group, initiator들이 target에 연결될 수 있도록 하는 설정들의 그룹
+1. ACL (Access Control List) : ISCSI Target에 접속을 허용할 Initiator 리스트
+ * iscsi/[target iqn 이름]/tpg1/acls/ create [허용할 initiator iqn 이름]
+2. LUN (Logical Unit Number) : ISCSI Target이 제공하는 논리적 SCSI 장치. Backstore랑 매핑
+ * iscsi/[target iqn 이름]]/tpg1/luns create [매핑할 backstores 경로]
+ * scsi/iqn.2021-11.com.gluesys:target/tpg1/luns/ create /backstore/fileio/file1
+3. Portal ( ISCSI Target의 네트워크 주소) : 기본적으로 0.0.0.0:3260으로 설정되어 있음
+ * portal 등록 : iscsi/[target iqn 이름]/tpg1/portals/ create [ip 주소][포트 3260] 
+ * portal 삭제 : iscsi/[target iqn 이름]/tpg1/portals/ delete [ip 주소][포트 3260] 
+
+----
+
+## 1. 환경 구성
+
+* CentOS 7 에서 진행
+
+> Target (Server)
+>> HostName : target
+>>> IQN : iqn.2021-11.com.gluesys:target
+>>>> Volume : /dev/sda, /dev/sdb
+
+> Initiator (Client)
+>> HostName : initiator
+>>> IQN : iqn.2021-11.com.test:initiator
+
+* Target <- Initiator `TCP 3260 포트 활성화`
+
+1. Target
+
+* ~]# yum install targetcli -y 
+
+* ~]# yum install iscsi-initiator-utils -y 
+
+* ~}# targetcli 
+
+```
+targetcli shell version 2.1.fb49
+Copyright 2011-2013 by Datera, Inc and others.
+For help on commands, type 'help'.
+
+/>
+```
+
+![Alt text](/image/result.JPG)

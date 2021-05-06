@@ -1,0 +1,30 @@
+---
+layout:     post
+title:      "Samba Active Directory Join 실습"
+date:       2021-05-20 
+author:     이 태민 (tmlee@gluesys.com)
+categories: blog
+tags:       [Docker, Command, Option, kube]
+cover:      "/assets/1.JPG"
+main:      "/assets/1.JPG"
+---
+
+이번 포스트는 NT 서버 Active Directory 계정과 CIFS 파일 공유를 사용하기 위한 Linux간 AD Join 실습을 진행하려고 합니다..!
+
+* 위 실습 전에 Active Directory와 Linux Samba 프로토콜에 대해서 설명 드리겠습니다~!
+
+## 1. Active Directory란?
+----
+
+Active Directory는 기업, 또는 주로 사용하는 사용자들에 대한 계정 정보들을 담고 있는 일종의 데이터베이스라고 하며, 각 사용자들의 정보 (ID, PassWord, 조직 그룹)를 저장하고 관리한다.
+당사 또한.. 처음에 데이터베이스라고 들었을 때, MySQL이나 MSSQL 같은 계층형 데이터베이스라고 생각했지만, Active Directory는 파일 타입의 데이터베이스라고 한다.
+
+Active Directory 데이터베이스는 "ISAM(Indexed and Sequential Access Method) 데이터베이스인 ESE(Extensible Storage Engine)"를 사용합니다.
+
+파일 단위로 저장하며, 각 사용자마다 보안 권한이 주어져서 일반 메모장이나 텍스트 에디터로는 열 수 없습니다.
+
+Active Directory의 데이터베이스 파일이 저장되는 기본 위치는, 도메인 컨트롤러의 C:\Windows\NTDS라는 폴더입니다.
+
+* C:\Windows\NTDS 폴더 안의 파일들에 대해 설명 하겠습니다.
+
+ * Ntds.dit - 물리적 활성 디렉터리 데이터베이스 파일이며, 여기에 모든 Active Directory 데이터가 저장됩니다. 도메인 정보, 스키마 정보 및 구성 정보를 보유합니다.
